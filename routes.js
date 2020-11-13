@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const User = require('./user');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 router.post('/signup', async (req, res, next) => {
     try {
@@ -35,12 +37,27 @@ router.post('/login', async (req, res, next) => {
         }
 
         //Find user with email and drag the password along
+        const user = await User.findOne({ email }).select('+password');
 
-        //Confirm that the password is correct
+        //Confirm user exists and password is correct
+        if (!user || !(await bcrypt.compare(password, user.password))) {
+            return res.status(404).json({
+                status: 'fail',
+                message: 'Incorrect email or password.'
+            });
+        }
 
         //Sign a JsonWebToken for the User
+        const token = jwt.sign({ id: user.id }, process.env.SECRET, {
+            expiresIn: process.env.EXPIRES_IN
+        })
 
         //Send JSON response to client
+        return res.status(200).json({
+            status: 'success',
+            message: 'You are now logged into the application.',
+            token
+        });
     } catch (error) {
         return res.status(500).json({
             status: 'fail',
