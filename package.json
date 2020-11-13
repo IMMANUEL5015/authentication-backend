@@ -1,7 +1,7 @@
 {
-  "name": "fullstack-authentication",
+  "name": "authentication-backend",
   "version": "1.0.0",
-  "description": "This project is a fullstack application designed to allow it's users to signup and login.",
+  "description": "This project is an api designed to allow it's users to signup and login.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,7 +13,7 @@
     "url": "git+https://github.com/IMMANUEL5015/fullstack-authentication.git"
   },
   "keywords": [
-    "Full-Stack",
+    "Backend",
     "Authentication"
   ],
   "author": "Immanuel Diai",
