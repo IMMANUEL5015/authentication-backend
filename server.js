@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const routes = require('./routes');
 const app = express();
 
 //Connect to Database
@@ -19,6 +20,9 @@ app.get('/', (req, res) => {
     });
 });
 
+app.use(express.json());
+
+app.use(routes);
 
 app.all('*', (req, res) => {
     res.status(404).json({
