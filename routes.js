@@ -39,6 +39,15 @@ router.post('/signup', async (req, res, next) => {
             user
         });
     } catch (error) {
+        if (error.name === "ValidationError") {
+            const errors = Object.values(error.errors).map(el => el.message);
+            const message = `${errors.join(' ')}`;
+            return res.status(400).json({
+                status: 'fail',
+                message
+            });
+        }
+
         return res.status(500).json({
             status: 'fail',
             message: error.message
