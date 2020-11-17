@@ -3,6 +3,11 @@
 ## Description
 This project is an API designed to allow it's users to signup and login.
 
+## Main Technologies Used
+* Node.js - JavaScript runtime for creating server-side applications.
+* Express - Node.js Framework
+* MongoDB - NOSQl Database
+
 ## Signing Up
 * Request:
 Request Type: POST
